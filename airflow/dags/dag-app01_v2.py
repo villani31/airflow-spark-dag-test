@@ -14,14 +14,14 @@ default_args = {
     'email_on_failure': False,
     'email_on_retry': False,
     'max_active_runs': 1,
-    'retries': 3
+    'retries': 1
 }
 
 dag = DAG(
     'Test-App-Spark_v2',
     default_args=default_args,
     schedule_interval=timedelta(days=1),
-    tags=['sparkapplication']
+    tags=['sparkapplication'],
 )
 
 submit = SparkKubernetesOperator(
@@ -30,7 +30,8 @@ submit = SparkKubernetesOperator(
     application_file="sparkoperator-app01.yaml",
     kubernetes_conn_id="k8s",
     do_xcom_push=True,
-    dag=dag
+    dag=dag,
+    timeout=600
 )
 
 sensor = SparkKubernetesSensor(
@@ -39,7 +40,8 @@ sensor = SparkKubernetesSensor(
     application_name="{{ task_instance.xcom_pull(task_ids='spark_pi_submit')['metadata']['name'] }}",
     kubernetes_conn_id="k8s",
     dag=dag,
-    attach_log=True
+    attach_log=True,
+    timeout=600
 )
 
 submit >> sensor
