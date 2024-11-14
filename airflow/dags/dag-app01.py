@@ -23,7 +23,6 @@ default_args = {
 
 dag = DAG(
     'Test-App-Spark',
-    start_date=days_ago(1),
     default_args=default_args,
     schedule_interval=timedelta(days=1),
    start_date=datetime(2024, 11, 13),
