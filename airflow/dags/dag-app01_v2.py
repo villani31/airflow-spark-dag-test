@@ -30,8 +30,7 @@ submit = SparkKubernetesOperator(
     application_file="sparkoperator-app01.yaml",
     kubernetes_conn_id="k8s",
     do_xcom_push=True,
-    dag=dag,
-    timeout=600
+    dag=dag
 )
 
 sensor = SparkKubernetesSensor(
@@ -40,8 +39,7 @@ sensor = SparkKubernetesSensor(
     application_name="{{ task_instance.xcom_pull(task_ids='spark_pi_submit')['metadata']['name'] }}",
     kubernetes_conn_id="k8s",
     dag=dag,
-    attach_log=True,
-    timeout=600
+    attach_log=True
 )
 
 submit >> sensor
