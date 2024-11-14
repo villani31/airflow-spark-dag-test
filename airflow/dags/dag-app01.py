@@ -26,12 +26,12 @@ with DAG(
    tags=['sparkapplication']
 ) as dag:
    t1 = SparkKubernetesOperator(
-       task_id='spark_transform_dat',
+       task_id='spark_transform_data',
        trigger_rule="all_success",
        depends_on_past=False,
        retries=3,
        application_file="sparkoperator-app01.yaml",
-       namespace="spark-jobs",
+       namespace="default",
        kubernetes_conn_id="k8s",
        do_xcom_push=True,
        dag=dag
