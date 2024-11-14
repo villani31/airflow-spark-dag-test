@@ -5,6 +5,9 @@ from airflow.providers.cncf.kubernetes.operators.spark_kubernetes import SparkKu
 from airflow.providers.cncf.kubernetes.sensors.spark_kubernetes import SparkKubernetesSensor
 from airflow.providers.cncf.kubernetes.hooks.kubernetes import KubernetesHook
 from airflow.utils.dates import days_ago
+
+from datetime import datetime, timedelta
+
 k8s_hook = KubernetesHook(conn_id='kubernetes_config')
 
 default_args = {
@@ -23,6 +26,7 @@ dag = DAG(
     start_date=days_ago(1),
     default_args=default_args,
     schedule_interval=timedelta(days=1),
+   start_date=datetime(2024, 11, 13),
     tags=['sparkapplication']
 )
 
