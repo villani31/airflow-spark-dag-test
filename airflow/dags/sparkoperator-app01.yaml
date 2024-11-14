@@ -1,0 +1,31 @@
+apiVersion: sparkoperator.k8s.io/v1beta2
+kind: SparkApplication
+metadata:
+  name: my-app-test
+  namespace: spark-jobs
+spec:
+  type: Python
+  mode: cluster
+  image: 'rodrigosf05/data-platform-open-source:spark-3.4.4_V1'
+  imagePullPolicy: Always
+  mainApplicationFile: local:///opt/App/my-app-test.py
+  sparkVersion: '3.4.4'
+  restartPolicy:
+    type: OnFailure
+    onFailureRetries: 3
+    onFailureRetryInterval: 10
+    onSubmissionFailureRetries: 5
+    onSubmissionFailureRetryInterval: 20
+  driver:
+    cores: 1
+    coreLimit: '1200m'
+    memory: '512m'
+    labels:
+      version: 3.4.4
+    serviceAccount: spark-operator-spark
+  executor:
+    cores: 1
+    instances: 2
+    memory: '512m'
+    labels:
+      version: 3.4.4
