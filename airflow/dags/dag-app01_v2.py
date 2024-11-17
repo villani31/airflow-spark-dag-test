@@ -38,6 +38,8 @@ sensor = SparkKubernetesSensor(
    namespace="default",
    application_name="{{ task_instance.xcom_pull(task_ids='spark_transform_data')['metadata']['name'] }}",
    kubernetes_conn_id="k8s",
+   poke_interval=30,  # Intervalo entre as tentativas de verificação (em segundos)
+   timeout=600,  # Tempo máximo para aguardar o job (em segundos)
    dag=dag,
    attach_log=True,
 )
