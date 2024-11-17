@@ -29,7 +29,6 @@ submit = SparkKubernetesOperator(
     namespace="default",
     application_file="sparkoperator-app01.yaml",
     kubernetes_conn_id="k8s",
-    do_xcom_push=True,
     dag=dag
 )
 
