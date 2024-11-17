@@ -27,8 +27,6 @@ dag = DAG(
 submit = SparkKubernetesOperator(
     task_id='spark_transform_data',
     namespace="default",
-    image= 'rodrigosf05/data-platform-open-source:spark-3.4.4_V1',
-    code_path="local:///opt/App/my-app-test.py",
     application_file="sparkoperator-app01.yaml",
     kubernetes_conn_id="k8s",
     do_xcom_push=True,
@@ -37,7 +35,7 @@ submit = SparkKubernetesOperator(
 
 sensor = SparkKubernetesSensor(
     task_id='spark_app_monitor',
-    namespace="sampletenant",
+    namespace="default",
     application_name="{{ task_instance.xcom_pull(task_ids='spark_pi_submit')['metadata']['name'] }}",
     kubernetes_conn_id="k8s",
     dag=dag,

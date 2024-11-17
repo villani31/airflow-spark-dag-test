@@ -7,9 +7,9 @@ metadata:
 spec:
   type: Python
   mode: cluster
-  # image: 'rodrigosf05/data-platform-open-source:spark-3.4.4_V1'
+  image: 'rodrigosf05/data-platform-open-source:spark-3.4.4_V1'
   imagePullPolicy: Always
-  # mainApplicationFile: local:///opt/App/my-app-test.py
+  mainApplicationFile: local:///opt/App/my-app-test.py
   sparkVersion: '3.4.4'
   restartPolicy:
     type: OnFailure
