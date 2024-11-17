@@ -36,7 +36,7 @@ submit = SparkKubernetesOperator(
 sensor = SparkKubernetesSensor(
    task_id='spark_app_monitor',
    namespace="default",
-   application_name="{task_instance.xcom_pull(task_ids='spark_transform_data')['metadata']['name'] }}",
+   application_name="{{ task_instance.xcom_pull(task_ids='spark_transform_data')['metadata']['name'] }}",
    kubernetes_conn_id="k8s",
    dag=dag,
    attach_log=True,
