@@ -3,7 +3,7 @@ kind: SparkApplication
 apiGroup: sparkoperator.k8s.io
 metadata:
   name: my-app-test
-  namespace: spark-operator
+  namespace: default
 spec:
   type: Python
   mode: cluster
