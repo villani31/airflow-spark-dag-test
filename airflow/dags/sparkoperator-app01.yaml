@@ -2,7 +2,7 @@ apiVersion: sparkoperator.k8s.io/v1beta2
 kind: SparkApplication
 apiGroup: sparkoperator.k8s.io
 metadata:
-  name: my-app-test
+  name: Test-App-Spark_v2
   namespace: default
 spec:
   type: Python
